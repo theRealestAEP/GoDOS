@@ -11,19 +11,21 @@ import (
 )
 
 const (
-	targetURL         = "http://localhost:8080" // Replace with the URL you want to test
-	workers           = 10                      // Number of concurrent workers
-	requestsPerWorker = 100                     // Number of requests each worker sends
+	targetURL = "http://localhost:8080" // Replace with the URL you want to test
 )
 
 var (
-	mode     string
-	targetIP string
+	mode              string
+	targetIP          string
+	workers           int
+	requestsPerWorker int
 )
 
 func init() {
 	flag.StringVar(&mode, "mode", "http", "Choose the test mode: http, tcp, or udp")
 	flag.StringVar(&targetIP, "target", "localhost:8080", "Target IP address and port for TCP/UDP tests")
+	flag.IntVar(&workers, "workers", 10, "Number of concurrent workers")
+	flag.IntVar(&requestsPerWorker, "requests", 100, "Number of requests each worker sends")
 	flag.Parse()
 }
 
@@ -119,10 +121,9 @@ func main() {
 			fmt.Printf("Invalid mode: %s. Supported modes are http, tcp, and udp.\n", mode)
 			return
 		}
-		
-		}
-		
-		wg.Wait()
-		fmt.Println("Load test completed")
-		}
-		
+
+	}
+
+	wg.Wait()
+	fmt.Println("Load test completed")
+}
