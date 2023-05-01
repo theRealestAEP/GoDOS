@@ -34,7 +34,7 @@ func customRequest(url string) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "Custom-Load-Tester/1.0")
+	req.Header.Set("User-Agent", "Custom-Load-Tester/1.0") //customize user agent here
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -83,7 +83,7 @@ func udpWorker(workerID int) {
 			break
 		}
 		fmt.Printf("Worker %d: write %d completed\n", workerID, j)
-		time.Sleep(time.Millisecond * 1)
+		time.Sleep(time.Millisecond * 1) //change this if you want to adjust the rate requests are sent
 	}
 }
 
